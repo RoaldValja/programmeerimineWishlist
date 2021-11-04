@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wishlist</title>
+    <script src="https://kit.fontawesome.com/b5624e6916.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="box" id="header">
+        <h1><i class="fas fa-calendar-alt"></i> <%= date %></h1>
+    </div>
+
+    <div class="box" id="wishlistBox">
+        <% for(let i = 0; i < wishlist.length; i++) { %>
+            <form action="/delete" method="post">
+                <div class="wish">
+                    <p class="wishDetails" ><%= wishlist[i].wish %></p>
+                    <% if(admin){ %>
+                        <button class="wishDetails" type="submit" value="<%= wishlist[i].id %>" name="checkbox"><i class="fas fa-eraser"></i></button>
+                    <% } %>
+                </div>
+            </form>
+        <% } %>
+    </div>
+
+    <div class="box" id="newWishBox">
+        <% if(admin) { %>
+            <form action="/" method="post">
+                <input type="text" name="newWish" id="newWish" placeholder="Add New Wish" onkeyup="validate()">
+                <button id="wishSubmit" type="submit" disabled><i class="fas fa-paper-plane"></i></button>
+            </form>
+            <span id="errorMessage"></span>
+        <% } %>
+    </div>
+
+    <footer>
+        <span>Roald Välja &#169; 2021</span>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
