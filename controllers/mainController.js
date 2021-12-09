@@ -36,6 +36,7 @@ exports.getAdminPage = (req, res) => {
 
 exports.getRandomWish = (req, res) => {
     let today = date.getTodayDateShort();
+    /*
     WishFromMongo.aggregate(
         [{ $sample: { size: 2 } }]
     )
@@ -53,6 +54,25 @@ exports.getRandomWish = (req, res) => {
     .catch(error => {
         console.log(error);
     });
+    */
+    WishFromMongo.aggregate(
+        [{$sample: {size:2}}], (error, randomWish) => {
+            if(!error){
+                console.log(randomWish);
+                if(lastRandom.wish == randomWish[0].wish || lastRandom.image == randomWish[0].image){
+                    lastRandom = randomWish[1];
+                    randomWish.splice(0, 1);
+                } else {
+                    lastRandom = randomWish[0];
+                    randomWish.splice(1, 1);
+                }
+                res.render('index.ejs', {date: today, wishlist: randomWish, permission: "random"});
+            }
+            else {
+                console.log(error);
+            }
+        }
+    )
 }
 
 exports.postNewWish = (req, res) => {
