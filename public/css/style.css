@@ -18,30 +18,103 @@
   }
 
   .box {
-    max-width: 400px;
     margin: 50px auto;
     background: white;
     border-radius: 5px;
     box-shadow: 5px 5px 15px -5px rgba(0, 0, 0, 0.3);
   }
 
+  .box.user {
+    max-width: 500px;
+  }
+  .box.admin {
+    max-width: 600px;
+  }
+  .box.random {
+    max-width: 800px;
+  }
+
   .box#wishlistBox {
-    opacity: 0.8;
+    opacity: 0.95;
     font-size: 20px;
   }
 
   #header {
-      text-align: center;
-      background-color: var(--green-color);
-  }
+    text-align: center;
+    background-color: var(--green-color);
+    margin: 0 auto;
+}
 
+  .admin#header {
+      width: 600px;
+  }
+.user#header {
+    width: 500px;
+}
+.random#header {
+  width: 800px;
+}
+/*
   .wish {
       text-align: center;
+      */
     /* min-height: 70px;
     display: flex;
     align-items: center;
     border-bottom: 1px solid var(--red-color); */
+    /*
   }
+*/
+
+.newWishInput {
+  text-align: center;
+  display: grid;
+  grid-template-columns: repeat(2, 50%);
+  grid-template-rows: 40px;
+  width: 100%;
+  height: 40px;
+}
+
+.wish {
+  text-align: center;
+  display: grid;
+}
+
+  .wish.user {
+    /*gap: 10px;*/
+    grid-template-columns: 200px 300px;
+    grid-auto-rows: minmax(20px, auto);
+    /*grid-gap: 1rem; */
+    width: 500px;
+    height: 200px;
+}
+.wish.admin {
+  /*gap: 10px;*/
+  grid-template-columns: 200px 300px 100px;
+  grid-auto-rows: minmax(20px, auto);
+  /*grid-gap: 1rem; */
+  width: 600px;
+  height: 200px;
+}
+.wish.random {
+  /*gap: 10px;*/
+  grid-template-columns: 200px 600px;
+  grid-auto-rows: minmax(20px, auto);
+  /*grid-gap: 1rem; */
+  width: 800px;
+  height: 400px;
+}
+
+.wish-image {
+  height: 100%;
+  width: 100%;
+}
+
+.wish-image img{
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
+}
 
   .box#wishlistBox form {
     border-bottom: 1px solid var(--red-color);
@@ -74,6 +147,11 @@
 
   .wishDetails {
     display: inline-block;
+    margin: auto;
+  }
+  .wish-text {
+    overflow: auto;
+    margin: auto;
   }
 
   #newWishBox {
@@ -82,7 +160,7 @@
 
   input[type="text"] {
     height: 40px;
-    width: 80%;
+    width: 90%;
     border: 0;
     text-align: center;
   }

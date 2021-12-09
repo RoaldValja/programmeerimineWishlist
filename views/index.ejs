@@ -9,16 +9,21 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <div class="box" id="header">
+    <div class="box <%= permission %>" id="header">
         <h1><i class="fas fa-calendar-alt"></i> <%= date %></h1>
     </div>
 
-    <div class="box" id="wishlistBox">
+    <div class="box <%= permission %>" id="wishlistBox">
         <% for(let i = 0; i < wishlist.length; i++) { %>
             <form action="/delete" method="post">
-                <div class="wish">
-                    <p class="wishDetails" ><%= wishlist[i].wish %></p>
-                    <% if(admin){ %>
+                <div class="wish <%= permission %>">
+                    <div class="wish-text">
+                        <p class="wishDetails" ><%= wishlist[i].wish %></p>
+                    </div>
+                    <div class="wish-image <%= wishlist[i].imageDescription %>">
+                        <img src="<%= wishlist[i].image %>" alt="<%= wishlist[i].imageDescription %>">
+                    </div>
+                    <% if(permission == "admin"){ %>
                         <button class="wishDetails" type="submit" value="<%= wishlist[i].id %>" name="checkbox"><i class="fas fa-eraser"></i></button>
                     <% } %>
                 </div>
@@ -26,10 +31,14 @@
         <% } %>
     </div>
 
-    <div class="box" id="newWishBox">
-        <% if(admin) { %>
-            <form action="/" method="post">
-                <input type="text" name="newWish" id="newWish" placeholder="Add New Wish" onkeyup="validate()">
+    <div class="box <%= permission %>" id="newWishBox">
+        <% if(permission == "admin") { %>
+            <form action="/" method="post" enctype="multipart/form-data">
+                <div class="newWishInput">
+                    <input type="text" name="newWish" id="newWish" placeholder="Add New Wish" onkeyup="validate()">
+                    <input type="text" name="description" placeholder="Add Wish Image Name">
+                </div>
+                <input type="file" name="userFile">
                 <button id="wishSubmit" type="submit" disabled><i class="fas fa-paper-plane"></i></button>
             </form>
             <span id="errorMessage"></span>
