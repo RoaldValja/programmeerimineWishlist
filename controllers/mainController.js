@@ -1,4 +1,5 @@
 const date = require('../getDate.js');
+const shuffle = require('../shuffle.js');
 const mongoose = require('mongoose');
 
 const WishFromMongo = mongoose.model('Wish');
@@ -12,6 +13,7 @@ exports.getHomePage = (req, res) => {
     WishFromMongo.find((error, wishes) => {
         if(!error){
             console.log(wishes);
+            wishes = shuffle.fisherYatesShuffle(wishes);
             res.render('index.ejs', {date: today, wishlist: wishes, permission: "user"});
         } else {
             console.log(error);
@@ -24,6 +26,7 @@ exports.getAdminPage = (req, res) => {
     WishFromMongo.find((error, wishes) => {
         if(!error){
             console.log(wishes);
+            wishes = shuffle.fisherYatesShuffle(wishes);
             res.render('index.ejs', {date: today, wishlist: wishes, permission: "admin"});
         } else {
             console.log(error);
