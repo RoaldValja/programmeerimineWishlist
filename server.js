@@ -19,6 +19,5 @@ app.use(mainPage);
 app.use(errorPage);
 
 app.listen(process.env.PORT || 3000, ()=>{
-    console.log("Server is running on Port 3000");
-    console.log(process.env.PORT);
+    console.log("Server is running on Port " + process.env.PORT);
 });
